@@ -16,6 +16,7 @@ Os testes envolvidos nesta aplicação são praticas aplicadas do curso básico 
 - Versão Yarn: ```1.22.19```
 - Versão Cypress: ```12.2.0```
 - Versão Chrome: ```126```
+- FakerJs: ```8.4.1```
 
 # Como executar o projeto
 
@@ -44,6 +45,9 @@ npm run dev
 
 # Instalar o cypress 
 yarn add cypress@12.2.0 -D
+
+# Instalar o Faker
+yarn add @faker-js/faker --dev
 ```
 
 # Autor
