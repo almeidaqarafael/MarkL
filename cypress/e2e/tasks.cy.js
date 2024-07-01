@@ -6,21 +6,8 @@ describe('tarefas', () => {
 
     const nomeTarefa = 'Comprar uma codorna'
 
-    cy.request({ 
-      url: 'http://localhost:3333/helper/tasks',
-      method: 'DELETE',
-      body: { name: nomeTarefa }
-    }).then(res => {
-        expect(res.status).to.eq(204)
-    });
-    
-    cy.visit('http://localhost:3000')
-
-    cy.get('input[placeholder="Add a new Task"]')
-      .type(nomeTarefa)
-
-    cy.contains('button', 'Create')
-      .click()
+    cy.removeTarefaPorNome(nomeTarefa)
+    cy.criarTarefa(nomeTarefa)
 
     cy.contains('main div p', nomeTarefa)
       .should('be.visible')
@@ -32,30 +19,10 @@ describe('tarefas', () => {
       name: 'Comprar uma casa para a codorna',
       is_done: false
     }
-
-    cy.request({ 
-      url: 'http://localhost:3333/helper/tasks',
-      method: 'DELETE',
-      body: { name: tarefa.name }
-    }).then(res => {
-        expect(res.status).to.eq(204)
-    });
-
-    cy.request({ 
-      url: 'http://localhost:3333/tasks',
-      method: 'POST',
-      body: tarefa
-    }).then(res => {
-      expect(res.status).to.eq(201)
-  });
-
-    cy.visit('http://localhost:3000')
-
-    cy.get('input[placeholder="Add a new Task"]')
-      .type(tarefa.name)
-
-    cy.contains('button', 'Create')
-      .click()
+    
+    cy.removeTarefaPorNome(tarefa.name)
+    cy.postTarefa(tarefa)
+    cy.criarTarefa(tarefa.name)
 
     cy.get('.swal2-html-container')
       .should('be.visible')
@@ -63,3 +30,4 @@ describe('tarefas', () => {
   });
 
 });
+
