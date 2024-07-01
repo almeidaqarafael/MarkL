@@ -4,10 +4,12 @@ describe('tarefas', () => {
 
   it('deve cadastrar uma nova tarefa', () => {
 
+    const nomeTarefa = 'Comprar uma codorna'
+
     cy.request({ 
       url: 'http://localhost:3333/helper/tasks',
       method: 'DELETE',
-      body: { name: 'Comprar uma codorna' }
+      body: { name: nomeTarefa }
     }).then(res => {
         expect(res.status).to.eq(204)
     });
@@ -15,21 +17,26 @@ describe('tarefas', () => {
     cy.visit('http://localhost:3000')
 
     cy.get('input[placeholder="Add a new Task"]')
-      .type('Comprar uma codorna')
+      .type(nomeTarefa)
 
     cy.contains('button', 'Create')
       .click()
 
-    cy.contains('main div p', 'Comprar uma codorna')
+    cy.contains('main div p', nomeTarefa)
       .should('be.visible')
   });
 
   it('não deve permitir tarefa duplicada', () => {
 
+    const tarefa = {
+      name: 'Comprar uma casa para a codorna',
+      is_done: false
+    }
+
     cy.request({ 
       url: 'http://localhost:3333/helper/tasks',
       method: 'DELETE',
-      body: { name: 'Comprar uma casa para a codorna' }
+      body: { name: tarefa.name }
     }).then(res => {
         expect(res.status).to.eq(204)
     });
@@ -37,10 +44,7 @@ describe('tarefas', () => {
     cy.request({ 
       url: 'http://localhost:3333/tasks',
       method: 'POST',
-      body: { 
-        name: 'Comprar uma casa para a codorna',
-        is_done: false
-       }
+      body: tarefa
     }).then(res => {
       expect(res.status).to.eq(201)
   });
@@ -48,7 +52,7 @@ describe('tarefas', () => {
     cy.visit('http://localhost:3000')
 
     cy.get('input[placeholder="Add a new Task"]')
-      .type('Comprar uma casa para a codorna')
+      .type(tarefa.name)
 
     cy.contains('button', 'Create')
       .click()
