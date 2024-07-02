@@ -38,5 +38,28 @@ describe('tarefas', () => {
 
   });
 
+  context('atualização', () => {
+
+    it('deve concluir uma tarefa', () => {
+      
+      const nomeTarefa = {
+        name: 'Comprar ração para codorna', 
+        is_done: false
+      }
+
+      cy.removeTarefaPorNome(nomeTarefa.name)
+      cy.postTarefa(nomeTarefa)
+      
+      cy.visit('http://localhost:3000')
+      cy.contains('p', nomeTarefa.name)
+        .parent()
+        .find('button[class*=ItemToggle]')
+        .click()
+
+      cy.contains('p', nomeTarefa.name)
+        .should('have.css', 'text-decoration-line', 'line-through')
+    }); 
+  });
+
 });
 
