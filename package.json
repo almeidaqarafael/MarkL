@@ -6,6 +6,8 @@
   "author": "Rafael Almeida",
   "license": "MIT",
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.40.2",
+    "allure-commandline": "^2.29.0",
     "cypress": "12.2.0"
   }
 }
