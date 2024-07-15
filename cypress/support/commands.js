@@ -1,5 +1,5 @@
 Cypress.Commands.add('criarTarefa', (nomeTarefa = '') => {
-  cy.visit('http://localhost:3000')
+  cy.visit('/')
 
   cy.get('input[placeholder="Add a new Task"]').as('inputTarefa')
 
@@ -25,7 +25,7 @@ Cypress.Commands.add('isRequired', (mensagemAlvo) => {
 
 Cypress.Commands.add('removeTarefaPorNome', (nomeTarefa) => {
   cy.request({ 
-    url: 'http://localhost:3333/helper/tasks',
+    url: Cypress.env('apiUrl') +  '/helper/tasks',
     method: 'DELETE',
     body: { name: nomeTarefa }
   }).then(res => {
@@ -35,7 +35,7 @@ Cypress.Commands.add('removeTarefaPorNome', (nomeTarefa) => {
 
 Cypress.Commands.add('postTarefa', (tarefa) => {
   cy.request({ 
-    url: 'http://localhost:3333/tasks',
+    url: Cypress.env('apiUrl') +  '/tasks',
     method: 'POST',
     body: tarefa
   }).then(res => {

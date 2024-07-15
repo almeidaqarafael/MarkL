@@ -50,7 +50,7 @@ describe('tarefas', () => {
       cy.removeTarefaPorNome(nomeTarefa.name)
       cy.postTarefa(nomeTarefa)
       
-      cy.visit('http://localhost:3000')
+      cy.visit('/')
       cy.contains('p', nomeTarefa.name)
         .parent()
         .find('button[class*=ItemToggle]')
@@ -73,7 +73,7 @@ describe('tarefas', () => {
       cy.removeTarefaPorNome(nomeTarefa.name)
       cy.postTarefa(nomeTarefa)
       
-      cy.visit('http://localhost:3000')
+      cy.visit('/')
       cy.contains('p', nomeTarefa.name)
         .parent()
         .find('button[class*=ItemDelete]')
