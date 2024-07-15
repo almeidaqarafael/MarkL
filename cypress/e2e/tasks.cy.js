@@ -61,5 +61,28 @@ describe('tarefas', () => {
     }); 
   });
 
+  context('exclusão', () => {
+
+    it('deve excluir uma tarefa', () => {
+      
+      const nomeTarefa = {
+        name: 'Comprar uma codorna', 
+        is_done: false
+      }
+
+      cy.removeTarefaPorNome(nomeTarefa.name)
+      cy.postTarefa(nomeTarefa)
+      
+      cy.visit('http://localhost:3000')
+      cy.contains('p', nomeTarefa.name)
+        .parent()
+        .find('button[class*=ItemDelete]')
+        .click()
+
+      cy.contains('p', nomeTarefa.name)
+        .should('not.exist')
+    }); 
+  });
+
 });
 
