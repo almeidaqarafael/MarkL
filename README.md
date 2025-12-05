@@ -74,6 +74,6 @@ O projeto é uma lista (to-do) que deve ser possível adicionar, concluir e excl
 
 Rafael Almeida 
 
-Analista de Teste Jr do produto HCM Teknisa, louco por tecnologia e sede de aprendizado. 
+Analista de Teste Pleno do produto HCM Teknisa, louco por tecnologia e sede de aprendizado. 
 
 https://www.linkedin.com/in/rafael13almeida/
